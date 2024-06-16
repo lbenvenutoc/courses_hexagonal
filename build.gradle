@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+	//id "org.sonarqube" version "5.0.0.4638"
+}
+
+/*
+sonar {
+	properties {
+		property "sonar.projectKey", "prueba"
+		property "sonar.host.url", "http://localhost:9000"
+		property "sonar.token", "sqp_f5126eaebab53d9b6f95c2ec70dd4ec2f39ddc37"
+	}
+}
+ */
+
+group = 'com.luisbenvenuto'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final' // Check for the latest version on Maven Central
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	implementation 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor "org.projectlombok:lombok:1.18.28"
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
